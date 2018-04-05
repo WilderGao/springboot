@@ -22,7 +22,7 @@ public class AsyncTest {
     public void task() throws InterruptedException {
         long start = System.currentTimeMillis();
         System.out.println("开始执行所有任务......");
-        task.doTaaskThree();
+        task.doTaskThree();
         task.doTaskOne();
         task.doTaskTwo();
         Thread.sleep(2000);

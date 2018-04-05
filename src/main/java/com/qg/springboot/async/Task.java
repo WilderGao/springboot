@@ -37,7 +37,7 @@ public class Task {
     }
 
     @Async
-    public void doTaaskThree() throws InterruptedException {
+    public void doTaskThree() throws InterruptedException {
         System.out.println("开始执行任务三"+new Date());
         long start = System.currentTimeMillis();
         Thread.sleep(random.nextInt(1000));
