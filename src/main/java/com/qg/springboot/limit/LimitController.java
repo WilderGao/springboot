@@ -1,4 +1,4 @@
-package com.qg.springboot.controller;
+package com.qg.springboot.limit;
 
 import com.qg.springboot.limit.RequestLimit;
 import org.springframework.stereotype.Controller;
