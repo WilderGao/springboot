@@ -16,7 +16,7 @@ import org.springframework.context.annotation.Configuration;
  * @time:2018/4/3
  * @Discription：
  */
-@Configuration
+//@Configuration
 public class RabbitConfig {
 
     @Bean
