@@ -1,0 +1,22 @@
+body{background-color: #ddd;}
+div.nav{
+	border-bottom: 1px solid gray;
+}
+div.nav_box{
+	width: 1000px;
+	margin: 10px auto;
+	vertical-align: middle;
+}
+button.nav-a{
+	padding-right: 20px;
+}
+h3{
+	display: inline-block;
+	vertical-align: bottom;
+	padding: 0;
+	margin: 0;
+}
+div.nav-form{
+	margin-left: 200px;
+	display: inline-block;
+}

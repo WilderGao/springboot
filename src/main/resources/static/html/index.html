@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="../css/button.css">
+    <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="../css/nav.css">
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../js/url.js"></script>
+    <script type="text/javascript" src="../bootstrap/js/bootstrap.js"></script>
+    <style type="text/css">
+        div.nav {
+            border-bottom: 1px solid gray;
+        }
+
+        .history_box {
+            width: 1200px;
+            margin: 10px auto;
+        }
+
+        .stuff_box {
+            overflow: hidden;
+        }
+
+        .stuff_box div {
+            display: inline-block;
+        }
+
+        div.email {
+            width: 140px;
+        }
+
+        div.name {
+            width: 140px;
+        }
+
+        div.roles {
+            width: 180px;
+        }
+
+        div.id {
+            width: 120px;
+        }
+
+        div.account {
+            width: 100px;
+            text-align: center;
+        }
+
+        div.see input {
+            margin-right: 10px;
+        }
+        .qrcode {
+            width: 120px;
+            position: static;
+            bottom: 5px;
+            left: 20px;
+        }
+
+        .card {
+            width: 600px;
+            height: 300px;
+            background: rgba(149, 238, 174, 0.2);
+            padding: 100px 100px 50px 100px;
+        }
+        .card h1 {
+            float: left;
+            font-size: 50px;
+            color: whitesmoke;
+        }
+
+        .card h3{
+            float: left;
+            font-size: 25px;
+            color: #f5f5f5;
+        }
+
+        .inform {
+            float: right;
+            width: 300px;
+            height: 300px;
+            position: relative;
+        }
+    </style>
+</head>
+<body style="background-image: url(../image/bg.04c2e53.png)">
+<div class="nav">
+    <h3>
+        <button class="blue button" id="information">个人信息</button>
+        <button class="red button" id="admin">成员管理</button>
+        <button class="blue button" id="logout">注销</button>
+    </h3>
+</div>
+<div class="history_box">
+    <ul class="list-group stuff_ul">
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#information").click(function () {
+            var ul = $(".stuff_ul");
+            ul.html("");
+            var result = $.information();
+            if (result.status == 200) {
+                var data = result.data;
+                var html = '<div class="card"><h1 class="title">'+data.name+'</h1>';
+                    html += '<div class="inform"><h3>Account: '+data.account+'</h3>';
+                    html += '<h3>E-mail: '+data.email+'</h3></div>';
+                    html+='</div>';
+                ul.html(html);
+            } else if (result.status == 250) {
+                alert("您没有使用该功能的权限");
+            }else {
+                console.log("用户还未登录");
+                alert("请先登录");
+                setTimeout("location.href='login.html'", 1000);
+            }
+        });
+        $("#admin").click(function () {
+            var ul = $(".stuff_ul");
+            ul.html("");
+            var result = $.allMember();
+            if (result.status == 200) {
+                var data = result.data;
+                var i = 0;
+                var html = '<li class="list-group-item active"><div class="stuff_box"><div class="id">用户Id</div>' +
+                    '<div class="account">账号</div><div class="name">用户名</div><div class="email">邮箱</div>' +
+                    '</div></li>';
+                for (; i < data.length; i++) {
+                    html += '<li class="list-group-item"><div class="stuff_box"><div class="id">';
+                    html += data[i].userId + '</div><div class="account">';
+                    html += data[i].account + '</div><div class="name">';
+                    html += data[i].name + '</div><div class="email">';
+                    html += data[i].email + '</div>';
+                    html += '</div></div></li>';
+                }
+                ul.html(html);
+            } else if (result.status == 250) {
+                alert("您没有权限执行这个操作");
+            }else {
+                console.log("用户还未登录");
+                alert("请先登录");
+                setTimeout("location.href='login.html'", 1000);
+            }
+        })
+    })
+</script>
+
+</body>
+</html>

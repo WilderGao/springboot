@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../js/url.js"></script>
+    <script type="text/javascript" src="../js/md5.js"></script>
+    <style type="text/css">
+        body{
+            background-color: #F2F2F2;
+        }
+        /*设置内容模块距离顶部一个有一段距离150px*/
+        .content {
+            margin-top: 150px;
+            margin-left: 650px;
+        }
+        /*登录和注册按钮的整体样式*/
+        .content button {
+            height: 30px;/*登录和注册按钮的高度*/
+            color:  white;/*登录和注册按钮字体颜色为白色*/
+            font-size: 18px;/*登录和注册按钮的字体大小*/
+            border: 0px;/*无边框*/
+            padding: 0px;/*无内边距*/
+            cursor: pointer;/*登录和注册按钮的选择时为手形状*/
+        }
+        /*登录面板*/
+        .content .panel {
+            background-color: white;/*登录面板背景颜色为白色*/
+            width: 380px;/*宽度为302px*/
+            height: 250px;
+            text-align: center;/*子内容居中*/
+            margin: 0px auto;/*自身居中*/
+            padding-top: 20px;/*顶部的内边距为20px*/
+            padding-bottom: 20px;/*底部的内边距为20px*/
+            border: 1px solid #ddd;/*边框颜色为灰色*/
+            border-radius: 5px;/*边框边角有5px的弧度*/
+
+        }
+        /*登录和密码组*/
+        .content .panel .group {
+            text-align: left;/*子内容居中*/
+            width: 262px;/*宽度为262px*/
+            margin: 0px auto 20px;/*自身居中，并距离底部有20px的间距*/
+        }
+        .content .panel .group label {
+            line-height: 30px;/*高度为30px*/
+            font-size: 18px;/*字体大小为18px*/
+        }
+        .content .panel .group input {
+            display: block;/*设置为块，是为了让输入框独占一行*/
+            width: 250px;/*宽度为250px*/
+            height: 30px;/*高度为30px*/
+            border: 1px solid #ddd;/*输入框的边框*/
+            padding: 0px 0px 0px 10px;/*左边内边距为10px，显得美观*/
+            font-size: 16px;/*字体大小*/
+        }
+        /*注册按钮*/
+        .content .register {
+            text-align: center;/*子内容居中*/
+            margin-top: 20px;/*顶部的内边距为20px*/
+        }
+        .content .register button {
+            background-color: #466BAF;/*按钮的背景颜色为蓝色*/
+            width: 180px;/*按钮的宽度*/
+        }
+    </style>
+</head>
+<body style="background-image: url(../image/bg.04c2e53.png)">
+<div class="content">
+    <div class="panel">
+        <!--  账号和密码组    -->
+        <div class="group">
+            <label>账号</label>
+            <input placeholder="请输入账号" type="text" name="name" id="name" onblur="check()">
+        </div>
+        <div class="group">
+            <label>密码</label>
+            <input placeholder="请输入密码" type="password" name="Password" id="Password" onblur="check()">
+        </div>
+        <div class="login">
+            <button type="button" class="btn btn-primary create_pro" id="login"
+                    style="background-color: #CC865E;width: 180px;border:0;margin:0;height:30px">登录</button>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(function() {
+        var key1 = $("#name");
+        var key2 = $("#Password");
+        $("#login").click(function () {
+            var account = key1.val();
+            var password = key2.val();
+            var url = "index.html";
+            var data = {};
+            if (account && password) {
+                data = {
+                    "account": account,
+                    "password": hex_md5(password)
+                };
+                var result = $.login(data);
+                if (result.status == 200) {
+                    window.location.href = url;
+                }else {
+                    alert("请检查账号密码是否正确");
+                }
+            }
+        })
+    })
+</script>
+<script type="text/javascript">
+    function check() {
+        var pattern = new RegExp("[0-9a-zA-Z]");
+        var value = document.getElementById('name').value;
+        if (!pattern.test(value)){
+            alert("输入格式有误，请检查后重新输入!");
+        }
+    }
+</script>
+</body>
+</html>
