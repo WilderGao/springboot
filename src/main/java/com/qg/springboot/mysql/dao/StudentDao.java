@@ -12,8 +12,8 @@ import java.util.List;
  * motto : everything is no in vain
  * description
  */
-@Mapper
-@Repository
+//@Mapper
+//@Repository
 public interface StudentDao {
 
     /**

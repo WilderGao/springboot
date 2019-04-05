@@ -19,7 +19,7 @@ import javax.sql.DataSource;
  * motto : everything is no in vain
  * description druid连接池配置
  */
-@Configuration
+//@Configuration
 public class DruidConfig {
     static final String PACKAGE = "com.qg.springboot.mysql.dao";
     private static final String MAPPER_LOCATION = "classpath:mapper/*.xml";
